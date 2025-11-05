@@ -1,6 +1,47 @@
 import java.util.Scanner;
 
 class DFSGraph {
+     private int V; // number of vertices 
+private LinkedList<Integer>[] adj; // adjacency list 
+@SuppressWarnings("unchecked") 
+ 
+    DFSGraph(int v) { 
+        V = v; 
+        adj = new LinkedList[v]; 
+        for (int i = 0; i < v; ++i) 
+            adj[i] = new LinkedList<>(); 
+    } 
+    void addEdge(int v, int w) { 
+        adj[v].add(w); // directed edge v -> w 
+    } 
+    void removeEdge(int v, int w) { 
+        adj[v].remove((Integer) w); // remove edge v -> w 
+    } 
+    void dfsUtil(int v, boolean visited[]) { 
+        visited[v] = true; 
+        System.out.print(v + " "); 
+        for (int n : adj[v]) { 
+            if (!visited[n]) { 
+                dfsUtil(n, visited); 
+            } 
+        } 
+    } 
+    void dfs(int s) { 
+        boolean visited[] = new boolean[V]; 
+        System.out.print("DFS starting from vertex " + s + ": "); 
+        dfsUtil(s, visited); 
+        System.out.println(); 
+    } 
+    void displayGraph() { 
+        System.out.println("Adjacency List of Graph:"); 
+        for (int i = 0; i < V; i++) { 
+            System.out.print(i + " -> "); 
+            for (int n : adj[i]) { 
+                System.out.print(n + " "); 
+            } 
+            System.out.println(); 
+        } 
+    }
      public static void main(String[] args) {
         Scanner sc =new Scanner(System.in);
         System.out.print("Enter the no. of vertices: ");
@@ -59,3 +100,4 @@ class DFSGraph {
     }
     
 }
+
